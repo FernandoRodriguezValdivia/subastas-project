@@ -5,6 +5,12 @@ const uniqueValidator = require('mongoose-unique-validator');
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
+  items: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Item',
+    },
+  ],
   nombres: {
     type: String,
   },

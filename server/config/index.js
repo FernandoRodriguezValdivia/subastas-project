@@ -19,6 +19,10 @@ const config = {
     port: process.env.SERVER_PORT,
   },
   nodEnv: process.env.NODE_ENV,
+  cloudinary: {
+    url: process.env.CLOUDINARY_URL,
+    preset: process.env.CLOUDINARY_UPLOAD_PRESET,
+  },
 };
 
 module.exports = config;
