@@ -6,7 +6,7 @@ const postUpdate = async (req, res, next) => {
     const user = await Seller.findByIdAndUpdate(req.id, data, { new: true });
     res.status(201).send({ message: 'update sucess', user });
   } catch (e) {
-    next(e.message);
+    next({ msg: e.message });
   }
 };
 

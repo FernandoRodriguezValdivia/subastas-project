@@ -6,7 +6,7 @@ const postCreate = async (req, res, next) => {
     const seller = await createSeller(data);
     res.status(201).json({ message: 'User Created', seller });
   } catch (e) {
-    next(e.message);
+    next({ msg: e.message });
   }
 };
 

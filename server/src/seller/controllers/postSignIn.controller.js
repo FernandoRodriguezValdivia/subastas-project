@@ -6,7 +6,7 @@ const postSignIn = async (req, res, next) => {
     const token = await signInSeller(data);
     res.status(201).send({ token, data });
   } catch (e) {
-    next(e.message);
+    next({ msg: e.message });
   }
 };
 

@@ -10,7 +10,7 @@ const postCreate = async (req, res, next) => {
     const item = await createItem({ ...data, ...img });
     res.status(201).json({ message: 'Item Created', item });
   } catch (e) {
-    next(e.message);
+    next({ msg: e.message });
   }
 };
 
