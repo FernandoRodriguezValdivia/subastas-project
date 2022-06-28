@@ -1,24 +1,16 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import IngresarUsuario from "components/IngresarUsuario";
+import Ingresar from "components/Ingresar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
-// import RegistroUsuario from "components/RegistroUsuario";
+import Registrar from "components/Registrar";
 
 const TabPanel = (props) => {
   const { children, value, index } = props;
 
-  return (
-    <div>
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
+  return <div>{value === index && <Box sx={{ p: 3 }}>{children}</Box>}</div>;
 };
 
 TabPanel.propTypes = {
@@ -27,7 +19,7 @@ TabPanel.propTypes = {
   value: PropTypes.number.isRequired,
 };
 
-const RegistroUsuario = () => {
+const Vendedor = () => {
   const [value, setValue] = React.useState(0);
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -37,14 +29,14 @@ const RegistroUsuario = () => {
       <Box
         sx={{
           bgcolor: "#005373",
-          width: "40%",
+          width: { xs: "100%", sm: "50%" },
           borderRadius: 6,
           margin: "auto",
           p: "0 100px",
         }}
       >
         <Typography sx={{ color: "#ffffff", mt: "20px", textAlign: "center" }}>
-          COMPRADOR
+          VENDEDOR
         </Typography>
         <Box
           sx={{
@@ -67,16 +59,16 @@ const RegistroUsuario = () => {
             <Tab label="INGRESAR" sx={{ color: "#ffffff" }} />
             <Tab label="REGISTRAR" sx={{ color: "#ffffff" }} />
           </Tabs>
+          <TabPanel value={value} index={0}>
+            <Ingresar tipo="VENDEDOR" />
+          </TabPanel>
+          <TabPanel value={value} index={1}>
+            <Registrar tipo="VENDEDOR" />
+          </TabPanel>
         </Box>
-        <TabPanel value={value} index={0}>
-          <IngresarUsuario />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          Esto es registar
-        </TabPanel>
       </Box>
     </Box>
   );
 };
 
-export default RegistroUsuario;
+export default Vendedor;

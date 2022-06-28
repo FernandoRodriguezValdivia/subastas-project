@@ -1,25 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from "context/userContext";
 
 const pages = [
-  { title: "QUIERO COMPRAR", url: "/registro" },
-  { title: "QUIERO VENDER", url: "/register" },
+  { title: "QUIERO COMPRAR", url: "/user" },
+  { title: "QUIERO VENDER", url: "/seller" },
 ];
 
 const Header = () => {
+  const { isLogin, ClearTokenState } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const desconectar = () => {
+    ClearTokenState();
+    navigate("/");
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar sx={{ bgcolor: "#005373" }}>
           <Typography
             variant="h6"
-            sx={{ textDecoration: "none", display: "block" }}
+            component={Link}
+            to="/"
+            sx={{ textDecoration: "none", display: "block", color: "#ffffff" }}
           >
             LOGO
           </Typography>
@@ -32,16 +43,25 @@ const Header = () => {
           <Box
             sx={{ justifyContent: "flex-end", flexGrow: 1, display: "flex" }}
           >
-            {pages.map((page) => (
+            {isLogin ? (
               <Button
-                component={Link}
-                key={page.title}
-                to={page.url}
                 sx={{ my: 2, color: "white", display: "block" }}
+                onClick={desconectar}
               >
-                {page.title}
+                Desconectar
               </Button>
-            ))}
+            ) : (
+              pages.map((page) => (
+                <Button
+                  component={Link}
+                  key={page.title}
+                  to={page.url}
+                  sx={{ my: 2, color: "white", display: "block" }}
+                >
+                  {page.title}
+                </Button>
+              ))
+            )}
           </Box>
         </Toolbar>
       </AppBar>
