@@ -1,17 +1,14 @@
 import React from "react";
 import AppRoutes from "Routes";
 import "./App.css";
-
-// import { UserContext } from "./context/userContext";
+import { SWRConfig } from "swr";
 
 const App = () => {
-  // const { Initialize } = useContext(UserContext);
-
-  // useEffect(() => {
-  //   Initialize();
-  // }, []);
-
-  return <AppRoutes />;
+  return (
+    <SWRConfig value={{}}>
+      <AppRoutes />
+    </SWRConfig>
+  );
 };
 
 export default App;

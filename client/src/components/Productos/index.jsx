@@ -1,17 +1,13 @@
 import React from "react";
 import Box from "@mui/material/Box";
-import CardProceso from "components/CardProceso";
 import Typography from "@mui/material/Typography";
-import useSWR from "swr";
+import PropTypes from "prop-types";
 
-import config from "../../config";
+import CardProceso from "components/CardProceso";
 
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
-const Proceso = () => {
-  const { data } = useSWR(`${config.urlBase}/api/item/all`, fetcher);
+const Productos = ({ data }) => {
   return (
-    <Box sx={{ bgcolor: "#005373", pb: 15 }}>
+    <Box sx={{ bgcolor: "#333", minHeight: "83vh" }}>
       <Typography
         variant="h1"
         sx={{
@@ -22,7 +18,7 @@ const Proceso = () => {
           fontSize: "20px",
         }}
       >
-        EN PROCESO
+        FINALIZADOS
       </Typography>
       <Box
         sx={{
@@ -33,14 +29,14 @@ const Proceso = () => {
           gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))",
         }}
       >
-        {data?.items.map((item) => (
+        {data.map((item) => (
           <CardProceso
             key={item.id}
+            id={item.id}
             nombre={item.name}
             precio={item.initialPrice}
             url={item.imageUrl}
             detalles={item.description}
-            id={item.id}
           />
         ))}
       </Box>
@@ -48,4 +44,16 @@ const Proceso = () => {
   );
 };
 
-export default Proceso;
+Productos.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      initialPrice: PropTypes.number.isRequired,
+      imageUrl: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+};
+
+export default Productos;

@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Carrusel from "components/Carrusel";
 import Categoria from "components/Categoria";
 import Proceso from "components/Proceso";
-import Proximo from "components/Proximo";
+// import Proximo from "components/Proximo";
 
 const Home = () => {
   return (
@@ -11,7 +11,7 @@ const Home = () => {
       <Carrusel />
       <Categoria />
       <Proceso />
-      <Proximo />
+      {/* <Proximo /> */}
     </Box>
   );
 };

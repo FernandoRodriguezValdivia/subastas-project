@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import Box from "@mui/material/Box";
 import CardMedia from "@mui/material/CardMedia";
@@ -6,9 +7,9 @@ import Button from "@mui/material/Button";
 import ModalCardProceso from "components/ModalCardProceso";
 import ModalCustom from "components/ModalCustom";
 
-const nombre = "NOMBRE DEL PRODUCTO";
-const precio = "150";
-const url =
+const nombred = "NOMBRE DEL PRODUCTO";
+const preciod = "150";
+const urld =
   "https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60";
 
 const styleImage = {
@@ -17,7 +18,13 @@ const styleImage = {
   objectFit: "fill",
 };
 
-const CardProceso = () => {
+const CardProceso = ({
+  id,
+  nombre = nombred,
+  precio = preciod,
+  url = urld,
+  detalles,
+}) => {
   const ref = React.createRef();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -61,7 +68,15 @@ const CardProceso = () => {
         Ver Detalles
       </Button>
       <ModalCustom open={open} handleClose={handleClose}>
-        <ModalCardProceso ref={ref} handleClose={handleClose} />
+        <ModalCardProceso
+          ref={ref}
+          handleClose={handleClose}
+          id={id}
+          nombre={nombre}
+          precio={precio}
+          detalles={detalles}
+          url={url}
+        />
       </ModalCustom>
     </Box>
   );

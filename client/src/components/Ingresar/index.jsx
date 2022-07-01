@@ -3,15 +3,37 @@ import Grid from "@mui/material/Grid";
 import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
 import PropTypes from "prop-types";
-
 import { UserContext } from "context/userContext";
+import { useNavigate } from "react-router-dom";
+import config from "../../config";
+
+const sendData = async (data, tipo) => {
+  const api = tipo === "VENDEDOR" ? "api/seller/signin" : "";
+  const response = await fetch(`${config.urlBase}/${api}`, {
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+  return response.json();
+};
 
 const Ingresar = ({ tipo }) => {
   const { ChangeTokenState } = useContext(UserContext);
+  const navigate = useNavigate();
 
-  const login = (e) => {
+  const login = async (e) => {
     e.preventDefault();
-    ChangeTokenState("this-toke", "Fernando", tipo, "this-id");
+    const formData = new FormData(e.target);
+    const data = Object.fromEntries(formData);
+    const { token, nombres, tipoUser, id } = await sendData(data, tipo);
+    if (token) {
+      ChangeTokenState(token, nombres, tipoUser, id);
+      navigate("/");
+    } else {
+      alert("datos incorrectos");
+    }
   };
 
   return (
@@ -22,7 +44,7 @@ const Ingresar = ({ tipo }) => {
       autoComplete="off"
       variant="standard"
       sx={{ button: { color: "black" } }}
-      // onSubmit={send}
+      onSubmit={login}
     >
       <Grid item xs={12} sx={{ p: { xs: 0, md: "0 20%" } }}>
         <InputBase
@@ -35,7 +57,7 @@ const Ingresar = ({ tipo }) => {
             width: "100%",
           }}
           variant="standard"
-          name="mail"
+          name="email"
         />
       </Grid>
       <Grid item xs={12} sx={{ p: { xs: 0, md: "0 20%" } }}>
@@ -63,7 +85,6 @@ const Ingresar = ({ tipo }) => {
             borderRadius: 3,
             width: "100%",
           }}
-          onClick={login}
         >
           INGRESAR {tipo}
         </Button>
