@@ -26,11 +26,22 @@ const itemSchema = new Schema({
   duration: {
     type: String,
   },
+  category: {
+    type: String,
+  },
   imageUrl: {
     type: String,
   },
   imageId: {
     type: String,
+  },
+});
+
+itemSchema.set('toJSON', {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id;
+    delete returnedObject._id;
+    delete returnedObject.__v;
   },
 });
 

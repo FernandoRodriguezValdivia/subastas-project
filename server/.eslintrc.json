@@ -20,6 +20,7 @@
         "ecmaVersion": "latest"
     },
     "rules": {
+        "no-new": "off",
         "no-underscore-dangle": "off",
         "no-param-reassign": "off",
         "no-console": "off",

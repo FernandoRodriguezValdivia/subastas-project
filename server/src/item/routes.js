@@ -17,4 +17,7 @@ itemRouter.post(
   controller.postCreate,
 );
 
+itemRouter.get('/get', isAuthorizated, controller.getSeller);
+itemRouter.get('/all', controller.getAll);
+
 module.exports = itemRouter;

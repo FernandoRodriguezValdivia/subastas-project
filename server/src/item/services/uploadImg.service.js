@@ -18,8 +18,8 @@ const uploadImg = async (img) => {
     const upload = await cloudinary.uploader.upload(tempFilePath, {
       upload_preset: preset,
     });
-    await cloudinary.api.delete_all_resources();
-    return { imageUrl: upload.secure_url, imageId: upload.public_id };
+    // await cloudinary.api.delete_all_resources();
+    return { imageUrl: upload.url, imageId: upload.public_id };
   } catch (e) {
     throw new Error(e);
   }
