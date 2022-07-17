@@ -11,6 +11,9 @@ const itemSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
   },
+  userName: {
+    type: String,
+  },
   name: {
     type: String,
   },

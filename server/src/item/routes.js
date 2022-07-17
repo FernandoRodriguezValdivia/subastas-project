@@ -19,5 +19,6 @@ itemRouter.post(
 
 itemRouter.get('/get', isAuthorizated, controller.getSeller);
 itemRouter.get('/all', controller.getAll);
+itemRouter.get('/activa/:id', controller.getActive);
 
 module.exports = itemRouter;

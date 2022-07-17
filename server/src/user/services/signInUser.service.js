@@ -15,7 +15,7 @@ const signInUser = async ({ email, password }) => {
       const verified = await verifiedPassword(password, user.password);
       if (verified) {
         const token = jwt.sign({ id: user._id }, secret);
-        return token;
+        return { token, nombres: user.nombres, tipoUser: 'user', id: user._id };
       }
       throw new Error('Data incorrect');
     } else {
