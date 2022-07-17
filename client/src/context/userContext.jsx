@@ -7,6 +7,14 @@ const UserContext = createContext(undefined);
 const UserProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [isLogin, setIsLogin] = useState(false);
+  const [notifications, setNotifications] = useState([
+    { id: 1, name: "Celular", title: "Fuiste Superado" },
+    { id: 2, name: "Cuadro", title: "Fuiste Superado" },
+    { id: 3, name: "Libro", title: "Ganaste" },
+    { id: 4, name: "Zapatilla", title: "Fuiste superado" },
+    { id: 5, name: "Libro", title: "Ganaste" },
+    { id: 6, name: "Libro", title: "Ganaste" },
+  ]);
 
   const Initialize = () => {
     if (localStorage.getItem("token")) {
@@ -51,9 +59,10 @@ const UserProvider = ({ children }) => {
         isLogin,
         user,
         setUser,
-        Initialize,
         ChangeTokenState,
         ClearTokenState,
+        notifications,
+        setNotifications,
       }}
     >
       {children}

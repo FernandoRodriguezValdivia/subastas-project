@@ -85,7 +85,7 @@ const ModalCardProceso = React.forwardRef(
             to={`/subasta/${id}`}
             sx={{ my: 2, color: "white", display: "block" }}
           >
-            Ir a subastea
+            Ir a subasta
           </Button>
         </Box>
       </Box>

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import config from "../../config";
 
 const sendData = async (data, tipo) => {
-  const api = tipo === "VENDEDOR" ? "api/seller/signin" : "";
+  const api = tipo === "VENDEDOR" ? "api/seller/signin" : "api/user/signin";
   const response = await fetch(`${config.urlBase}/${api}`, {
     method: "POST",
     body: JSON.stringify(data),
@@ -19,8 +19,19 @@ const sendData = async (data, tipo) => {
   return response.json();
 };
 
+const getNotification = () => {
+  return [
+    { id: 1, name: "Celular", title: "Fuiste Superado" },
+    { id: 2, name: "Cuadro", title: "Fuiste Superado" },
+    { id: 3, name: "Libro", title: "Ganaste" },
+    { id: 4, name: "Zapatilla", title: "Fuiste superado" },
+    { id: 5, name: "Libro", title: "Ganaste" },
+    { id: 6, name: "Libro", title: "Ganaste" },
+  ];
+};
+
 const Ingresar = ({ tipo }) => {
-  const { ChangeTokenState } = useContext(UserContext);
+  const { ChangeTokenState, setNotifications } = useContext(UserContext);
   const navigate = useNavigate();
 
   const login = async (e) => {
@@ -30,6 +41,7 @@ const Ingresar = ({ tipo }) => {
     const { token, nombres, tipoUser, id } = await sendData(data, tipo);
     if (token) {
       ChangeTokenState(token, nombres, tipoUser, id);
+      setNotifications(getNotification());
       navigate("/");
     } else {
       alert("datos incorrectos");

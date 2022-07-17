@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
 import config from "../../config";
 
 const sendData = async (data, tipo) => {
-  const api = tipo === "VENDEDOR" ? "api/seller/create" : "";
+  const api = tipo === "VENDEDOR" ? "api/seller/create" : "api/user/create";
   const response = await fetch(`${config.urlBase}/${api}`, {
     method: "POST",
     body: JSON.stringify(data),

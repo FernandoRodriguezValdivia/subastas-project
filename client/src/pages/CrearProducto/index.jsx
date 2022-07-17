@@ -10,7 +10,7 @@ const CrearProducto = () => {
       <Box
         sx={{
           bgcolor: "#005373",
-          width: { xs: "80%", sm: "50%" },
+          width: { xs: "80%", sm: "90%" },
           borderRadius: 6,
           margin: "auto",
         }}

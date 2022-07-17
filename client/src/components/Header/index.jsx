@@ -7,6 +7,7 @@ import Button from "@mui/material/Button";
 import InputBase from "@mui/material/InputBase";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "context/userContext";
+import HeaderUser from "components/HeaderUser";
 
 const pages = [
   { title: "QUIERO COMPRAR", url: "/user" },
@@ -44,12 +45,7 @@ const Header = () => {
             sx={{ justifyContent: "flex-end", flexGrow: 1, display: "flex" }}
           >
             {isLogin ? (
-              <Button
-                sx={{ my: 2, color: "white", display: "block" }}
-                onClick={desconectar}
-              >
-                Desconectar
-              </Button>
+              <HeaderUser desconectar={desconectar} />
             ) : (
               pages.map((page) => (
                 <Button

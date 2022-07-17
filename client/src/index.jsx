@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "App";
+import { SocketProvider } from "context/socketContext";
 import reportWebVitals from "./reportWebVitals";
 
 import { UserProvider } from "./context/userContext";
@@ -10,7 +11,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <UserProvider>
-      <App />
+      <SocketProvider>
+        <App />
+      </SocketProvider>
     </UserProvider>
   </React.StrictMode>,
 );
