@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "agenda": "^4.3.0",
     "bcrypt": "^5.0.1",
     "cloudinary": "^1.30.0",
     "colors": "^1.4.0",

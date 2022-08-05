@@ -3,24 +3,20 @@ import React, { useContext } from "react";
 import { Box, ListItem, ListItemText, IconButton } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import { UserContext } from "context/userContext";
+import { NotificationContext } from "context/notificationContext";
 
-const Notification = ({ id, nombre, title }) => {
-  const { notifications, setNotifications } = useContext(UserContext);
-
-  const eliminar = (idItem) => {
-    setNotifications(notifications.filter((item) => item.id !== idItem));
-  };
+const Notification = ({ id, name, title }) => {
+  const { deleteNotification } = useContext(NotificationContext);
 
   return (
     <Box sx={{ display: "flex" }}>
       <ListItem button>
         <Box>
-          <ListItemText primary={title} secondary={`Subasta de ${nombre}`} />
+          <ListItemText primary={title} secondary={`Subasta de ${name}`} />
         </Box>
       </ListItem>
       <Box sx={{ display: "flex", alignItems: "center" }}>
-        <IconButton size="small" onClick={() => eliminar(id)}>
+        <IconButton size="small" onClick={() => deleteNotification(id)}>
           <DeleteIcon />
         </IconButton>
       </Box>

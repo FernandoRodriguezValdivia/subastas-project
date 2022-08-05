@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "App";
 import { SocketProvider } from "context/socketContext";
+import { NotificationProvider } from "context/notificationContext";
 import reportWebVitals from "./reportWebVitals";
 
 import { UserProvider } from "./context/userContext";
@@ -10,11 +11,13 @@ import { UserProvider } from "./context/userContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <UserProvider>
-      <SocketProvider>
-        <App />
-      </SocketProvider>
-    </UserProvider>
+    <NotificationProvider>
+      <UserProvider>
+        <SocketProvider>
+          <App />
+        </SocketProvider>
+      </UserProvider>
+    </NotificationProvider>
   </React.StrictMode>,
 );
 

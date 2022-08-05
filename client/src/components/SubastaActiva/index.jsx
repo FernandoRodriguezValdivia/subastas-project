@@ -5,6 +5,7 @@ import { Button, CardMedia, Grid, InputBase, Typography } from "@mui/material";
 
 import { SocketContext } from "context/socketContext";
 import { UserContext } from "context/userContext";
+import { NotificationContext } from "context/notificationContext";
 
 const styleImage = {
   maxWidth: "450px",
@@ -15,6 +16,7 @@ const styleImage = {
 const SubastaActiva = ({ id }) => {
   const { socket } = useContext(SocketContext);
   const { user } = useContext(UserContext);
+  const { newNotification } = useContext(NotificationContext);
   const [data, setData] = useState({});
   const [comprador, setComprador] = useState();
 
@@ -26,7 +28,6 @@ const SubastaActiva = ({ id }) => {
     const idUser = localStorage.getItem("id");
     const payload = { cant, newName, idItem, idUser };
     socket?.emit("add", payload);
-    console.log("emit", payload);
   };
 
   useEffect(() => {
@@ -42,7 +43,11 @@ const SubastaActiva = ({ id }) => {
 
   useEffect(() => {
     socket?.emit("room", id);
-    return () => socket?.emit("salir", id);
+    socket?.emit("suscribe-notification", { id: localStorage.getItem("id") });
+    return () => {
+      socket?.emit("salir", id);
+      socket?.emit("unsubscribe-notification", { id });
+    };
   }, [socket]);
 
   useEffect(() => {
@@ -51,6 +56,13 @@ const SubastaActiva = ({ id }) => {
         return { ...prev, finalPrice: payload.cant };
       });
       setComprador(payload.newName);
+    });
+  }, [socket]);
+
+  useEffect(() => {
+    socket?.on("notification", (payload) => {
+      newNotification(payload);
+      console.log("notification", payload);
     });
   }, [socket]);
 

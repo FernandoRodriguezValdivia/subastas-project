@@ -14,10 +14,10 @@ import NotificationsIcon from "@mui/icons-material/Notifications";
 import PropTypes from "prop-types";
 
 import Notification from "components/Notification";
-import { UserContext } from "context/userContext";
+import { NotificationContext } from "context/notificationContext";
 
 const HeaderUser = ({ desconectar }) => {
-  const { notifications } = useContext(UserContext);
+  const { notifications } = useContext(NotificationContext);
   const [anchorNotification, setAnchorNotification] = useState(null);
 
   const handleOpenNotification = (event) => {
@@ -61,10 +61,10 @@ const HeaderUser = ({ desconectar }) => {
             {notifications.map((item) => (
               <div key={item.id}>
                 <Notification
-                  key={item.id}
                   id={item.id}
-                  nombre={item.name}
+                  name={item.name}
                   title={item.title}
+                  item={item.item}
                 />
                 <Divider />
               </div>
